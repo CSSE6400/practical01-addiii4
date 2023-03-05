@@ -1,67 +1,30 @@
-from flask import Blueprint, jsonify
+@baseUrl = http://localhost:6400
 
-api = Blueprint('api', __name__, url_prefix='/api/v1')
+### Health
+GET {{baseUrl}}/api/v1/health
 
-@api.route('/health')
-def health():
-    return jsonify({"status": "ok"})
+### List All Todos
+GET {{baseUrl}}/api/v1/todos
 
-@api.route('/todos', methods=['GET'])
-def get_todos():
-    return jsonify([{
-        "id": 1,
-        "title": "Watch CSSE6400 Lecture",
-        "description": "Watch the CSSE6400 lecture on ECHO360 for week 1",
-        "completed": True,
-        "deadline_at": "2023-02-27T00:00:00",
-        "created_at": "2023-02-20T00:00:00",
-        "updated_at": "2023-02-20T00:00:00"
-    }])
+### Get a specific Todo
+GET {{baseUrl}}/api/v1/todos/1
 
-@api.route('/todos/<int:id>', methods=['GET'])
-def get_todo(id):
-    return jsonify({
-        "id": id,
-        "title": "Watch CSSE6400 Lecture",
-        "description": "Watch the CSSE6400 lecture on ECHO360 for week 1",
-        "completed": True,
-        "deadline_at": "2023-02-27T00:00:00",
-        "created_at": "2023-02-20T00:00:00",
-        "updated_at": "2023-02-20T00:00:00"
-    })
+### Create a Todo
+POST {{baseUrl}}/api/v1/todos
+Content-Type: application/json
 
-@api.route('/todos', methods=['POST'])
-def create_todo():
-    return jsonify([{
-        "id": 1,
-        "title": "Watch CSSE6400 Lecture",
-        "description": "Watch the CSSE6400 lecture on ECHO360 for week 1",
-        "completed": True,
-        "deadline_at": "2023-02-27T00:00:00",
-        "created_at": "2023-02-20T00:00:00",
-        "updated_at": "2023-02-20T00:00:00"
-    }]) ,201
+{
+    "title": "An example Todo",
+    "description": "This is an example todo",
+}
 
-@api.route('/todos/<int:id>', methods=['PUT'])
-def update_todo(id):
-    return jsonify({
-        "id": id,
-        "title": "Watch CSSE6400 Lecture",
-        "description": "Watch the CSSE6400 lecture on ECHO360 for week 1",
-        "completed": True,
-        "deadline_at": "2023-02-27T00:00:00",
-        "created_at": "2023-02-20T00:00:00",
-        "updated_at": "2023-02-20T00:00:00"
-    })
+### Update a Todo
+PUT {{baseUrl}}/api/v1/todos/1
+Content-Type: application/json
 
-@api.route('/todos/<int:id>', methods=['DELETE'])
-def delete_todo(id):
-    return jsonify({
-        "id": id,
-        "title": "Watch CSSE6400 Lecture",
-        "description": "Watch the CSSE6400 lecture on ECHO360 for week 1",
-        "completed": True,
-        "deadline_at": "2023-02-27T00:00:00",
-        "created_at": "2023-02-20T00:00:00",
-        "updated_at": "2023-02-20T00:00:00"
-    })
+{
+    "title": "updated title",
+}
+
+### Delete a Todo
+DELETE {{baseUrl}}/api/v1/todos/1
